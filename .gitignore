@@ -8,6 +8,9 @@ tags
 *.swp
 *.swo
 
+# QtCreator junk
+*.user
+
 # Prerequisites
 *.d
 

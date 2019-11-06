@@ -15,8 +15,106 @@ add_custom_target(update COMMENT "Updated all external projects")
 # target_link_libraries (DSV PRIVATE catch)
 # #include <catch.hpp>
 ExternalHeaderOnly_Add(Catch
-    "https://github.com/catchorg/Catch2.git" "master" "single_include/catch2")
+		"https://github.com/catchorg/Catch2.git" "master" "single_include/catch2")
 
+
+#------------------------------------------------------------------------------
+# GLM - Crossplatform graphics math library
+ExternalHeaderOnly_Add(glm
+		 "https://github.com/g-truc/glm.git" "master" "glm/glm.hpp")
+
+add_subdirectory(${glm_SOURCE_DIR} EXCLUDE_FROM_ALL)
+find_package(glm REQUIRED)
+
+#------------------------------------------------------------------------------
+# GLFW - Clorssplatform graphics context library
+
+
+ExternalDownloadNowGit(glfw https://github.com/glfw/glfw.git master)
+add_subdirectory(${glfw_SOURCE_DIR} EXCLUDE_FROM_ALL)
+find_package(glfw3 REQUIRED)
+
+#------------------------------------------------------------------------------
+# Corrade - crossplatform utility library
+
+
+#ExternalDownloadNowGit(corrade https://github.com/mosra/corrade.git master)
+#option(BUILD_corrade_TESTS "" OFF) #disable tests
+#option(USE_SYSTEM_corrade "" ON ) #use system curl
+#add_subdirectory(${corrade_SOURCE_DIR} EXCLUDE_FROM_ALL)
+# Make headers come as SYSTEM, to get rid of all warning on included headers
+#set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${corrade_SOURCE_DIR}/modules)
+#find_package(Corrade REQUIRED Main)
+
+
+#------------------------------------------------------------------------------
+# Magnum - C++ Graphics framwork
+
+#ExternalDownloadNowGit(magnum https://github.com/mosra/magnum.git master)
+# Add Magnum as a subproject, enable Sdl2Application
+#set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
+#set(WITH_ANYIMAGEIMPORTER ON CACHE BOOL "" FORCE)
+#set(WITH_TGAIMPORTER ON CACHE BOOL "" FORCE)
+#set(WITH_OBJIMPORTER ON CACHE BOOL "" FORCE)
+#set(WITH_ANYSCENEIMPORTER ON CACHE BOOL "" FORCE)
+#set(WITH_MAGNUMFONT ON CACHE BOOL "" FORCE)
+#add_subdirectory(${magnum_SOURCE_DIR} EXCLUDE_FROM_ALL)
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${magnum_SOURCE_DIR}/modules)
+#find_package(Magnum REQUIRED
+#	GL
+#	MeshTools
+#	Primitives
+#	Shaders
+# SceneGraph
+#	Trade
+#	Text
+#	Sdl2Application
+#)
+
+#------------------------------------------------------------------------------
+# MagnumPlugins
+
+#ExternalDownloadNowGit(magnum_plugins https://github.com/mosra/magnum-plugins.git master)
+# Add MagnumPlugins as a subproject, enable TrueType font and importers
+#set(WITH_STBTRUETYPEFONT ON CACHE BOOL "" FORCE)
+#set(WITH_DDSIMPORTER ON CACHE BOOL "" FORCE)
+#set(WITH_STBIMAGEIMPORTER ON CACHE BOOL "" FORCE)
+#set(WITH_TINYGLTFIMPORTER ON CACHE BOOL "" FORCE)
+#add_subdirectory(${magnum_plugins_SOURCE_DIR} EXCLUDE_FROM_ALL)
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${magnum_plugins_SOURCE_DIR}/modules)
+#find_package(MagnumPlugins REQUIRED
+#	StbImageImporter
+#	TinyGltfImporter
+#	DdsImporter
+#	StbTrueTypeFont
+#)
+#add_custom_target(plugins ALL DEPENDS
+#	Magnum::AnyImageImporter
+#	Magnum::AnySceneImporter
+#	Magnum::ObjImporter
+#	Magnum::TgaImporter
+#	Magnum::MagnumFont
+#	MagnumPlugins::StbImageImporter
+#	MagnumPlugins::TinyGltfImporter
+#	MagnumPlugins::DdsImporter
+#	MagnumPlugins::StbTrueTypeFont
+#)
+
+#------------------------------------------------------------------------------
+# MagnumExtras
+
+#ExternalDownloadNowGit(magnum_extras https://github.com/mosra/magnum-extras.git master)
+# Add MagnumExtras as a subproject, enable Ui
+#set(WITH_UI ON CACHE BOOL "" FORCE)
+#add_subdirectory(${magnum_extras_SOURCE_DIR} EXCLUDE_FROM_ALL)
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${magnum_extras_SOURCE_DIR}/modules)
+#find_package(MagnumExtras REQUIRED
+#	Ui
+#)
+#add_custom_target (extras ALL DEPENDS
+#	MagnumExtras::Ui
+#)
 #------------------------------------------------------------------------------
 # Examples of other external projects
 #------------------------------------------------------------------------------
